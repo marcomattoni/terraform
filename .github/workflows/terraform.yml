@@ -120,7 +120,7 @@ jobs:
       # Run OPA policy checks
       - name: Run OPA Checks
         run: |
-          result=$(opa exec --bundle opa/ --decision data --stdin-input tfplan.json --format json)
+          result=$(opa exec --bundle opa/ --decision data --stdin-input < tfplan.json --format json)
           echo "OPA Evaluation Result: $result"
           if echo "$result" | grep -q '"result":\[\]'; then
           echo "All policies allowed the action."
