@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: Marco-Enterprises/Opa-Policies
-          token: ${{ secrets.OPA_POLICIES_TOKEN }}
+          token: ${{ secrets.ENTERPRISE_PAT }}
           path: opa  # Important: Specify the path
           ref: main
           fetch-depth: 0      # Fetch all history (recommended)
