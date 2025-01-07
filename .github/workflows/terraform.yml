@@ -120,11 +120,4 @@ jobs:
       # Run OPA policy checks
       - name: Run OPA Checks
         run: |
-          result=$(opa exec --bundle opa/ --decision data.deny tfplan.json --format json)
-          echo "OPA Evaluation Result: $result"
-          if echo "$result" | jq -e '.result[] | select(.result | length > 0) .result' > /dev/null; then
-          echo "All policies allowed the action."
-          else
-          echo "Some policies denied the action."
-          exit 1
-          fi
+          opa eval --data opa --input tfplan.json --fail-defined --format pretty 'data.deny'
