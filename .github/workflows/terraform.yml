@@ -120,4 +120,4 @@ jobs:
       # Run OPA policy checks
       - name: Run OPA Checks
         run: |
-          opa eval --data opa --input tfplan.json --fail-defined --format pretty 'data.deny'
+          opa eval --data opa/ --input tfplan.json --fail-defined --format pretty 'data[_][_].deny[_]'
