@@ -5,8 +5,8 @@ on:
     branches:
       - main
 
-env:
-  TF_LOG: INFO
+#env:
+  #TF_LOG: INFO
 
 permissions:
   id-token: write
@@ -77,28 +77,28 @@ jobs:
           terraform plan --out=tfplan
 
       # Trivy Cache Set up
-      - name: Set up cache for Trivy DB
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/trivy
-          key: ${{ runner.os }}-trivy-db
-          restore-keys: |
-            ${{ runner.os }}-trivy-db
+      #- name: Set up cache for Trivy DB
+        #uses: actions/cache@v3
+        #with:
+          #path: ~/.cache/trivy
+          #key: ${{ runner.os }}-trivy-db
+          #restore-keys: |
+            #${{ runner.os }}-trivy-db
 
       # Install Trivy
-      - name: Install Trivy
-        run: |
-         curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
-          sudo install ./bin/trivy /usr/local/bin/trivy
+      #- name: Install Trivy
+        #run: |
+         #curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh
+          #sudo install ./bin/trivy /usr/local/bin/trivy
 
-      - name: Run Trivy Scan
-        run: |
-          trivy fs --scanners misconfig,vuln,secret \
-          --debug --trace --skip-check-update \
+      #- name: Run Trivy Scan
+        #run: |
+          #trivy fs --scanners misconfig,vuln,secret \
+          #--debug --trace --skip-check-update \
           .
-        env:
-          TF_LOG: INFO
-          TERRAFORM_CLI_PATH: /home/runner/work/_temp/7e8566a8-e7d1-44da-8092-6a69a8d9b8dc
+        #env:
+          #TF_LOG: INFO
+          #TERRAFORM_CLI_PATH: /home/runner/work/_temp/7e8566a8-e7d1-44da-8092-6a69a8d9b8dc
 
       # Convert the Terraform plan to JSON
       - name: Convert Terraform plan to JSON
