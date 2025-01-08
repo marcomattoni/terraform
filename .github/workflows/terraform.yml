@@ -5,8 +5,8 @@ on:
     branches:
       - main
 
-#env:
-  #TF_LOG: INFO
+env:
+  TF_LOG: INFO
 
 permissions:
   id-token: write
